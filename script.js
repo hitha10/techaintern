@@ -1,35 +1,32 @@
-let typed = new Typed('#typed', {
-  strings:['Hitha.C'],
-  typeSpeed: 80,
-  backSpeed: 80,
-  backDelay: 1000,
-  loop: true,
-});
 
-const menuIcon = document.getElementById('menu-icon');
-const menuCloseIcon = document.getElementById('menu-close-icon');
-const navbar = document.getElementById('navbar');
+let slideIndex = 1;
 
-
-function showMenu() {
-  navbar.style.right="0rem";  
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("slide");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " active";
 }
 
-function hideMenu(){
-navbar.style.right="-20rem"
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
 }
 
-window.onscroll=()=>{
-navbar.style.right="-20rem";
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
 }
 
-ScrollReveal({
-  reset:true,
-  distance:"120px",
-  duration:2000,
-  delay:50
-});
+showSlides(slideIndex);
 
-ScrollReveal().reveal('.home-content,.about-img',{origin:'left'});
-ScrollReveal().reveal('.btn-box', {origin:'bottom'});
-ScrollReveal().reveal('.heading', {origin:'top'} );
